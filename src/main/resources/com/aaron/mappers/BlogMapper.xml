@@ -3,28 +3,31 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaron.dao.BlogDao">
-
 	<resultMap type="Blog" id="BlogResult">
-		<result property="id" column="id"/>
-		<result property="title" column="title"/>
-		<result property="summary" column="summary"/>
-		<result property="releaseDate" column="releaseDate"/>
-		<result property="clickHit" column="clickHit"/>
-		<result property="replyHit" column="replyHit"/>
-		<result property="content" column="content"/>
-		<result property="keyWord" column="keyWord"/>
-		<association property="blogType" column="typeId" select="com.aaron.dao.BlogTypeDao.findById"></association>
-		
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="summary" column="summary" />
+		<result property="releaseDate" column="releaseDate" />
+		<result property="clickHit" column="clickHit" />
+		<result property="replyHit" column="replyHit" />
+		<result property="content" column="content" />
+		<result property="keyWord" column="keyWord" />
+		<association property="blogType" column="typeId"
+			select="com.aaron.dao.BlogTypeDao.findById"></association>
+
 	</resultMap>
-	
-	<select id="countList"  resultMap="BlogResult">
-		SELECT DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr ,COUNT(*) AS blogCount  FROM t_blog GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
+
+	<select id="countList" resultMap="BlogResult">
+		SELECT
+		DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr ,COUNT(*) AS
+		blogCount FROM t_blog GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER
+		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
 	</select>
-	
+
 	<select id="list" parameterType="Map" resultMap="BlogResult">
 		select * from t_blog
 		<where>
-		    <if test="title!=null and title!='' ">
+			<if test="title!=null and title!='' ">
 				and title like #{title}
 			</if>
 			<if test="typeId!=null and typeId!='' ">
@@ -39,11 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			limit #{start},#{size}
 		</if>
 	</select>
-	
+
 	<select id="getTotal" parameterType="Map" resultType="Long">
 		select count(*) from t_blog
 		<where>
-		    <if test="title!=null and title!='' ">
+			<if test="title!=null and title!='' ">
 				and title like #{title}
 			</if>
 			<if test="typeId!=null and typeId!='' ">
@@ -54,11 +57,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
-	
+
 	<select id="findById" parameterType="Integer" resultMap="BlogResult">
-		select * from t_blog where id=#{id}
+		select *
+		from t_blog where id=#{id}
 	</select>
-	
+
 	<update id="update" parameterType="Blog">
 		update t_blog
 		<set>
@@ -86,21 +90,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where id=#{id}
 	</update>
-	
+
 	<select id="getLastBlog" parameterType="Integer" resultMap="BlogResult">
 		SELECT * FROM t_blog WHERE id&lt;#{id} ORDER BY id DESC LIMIT 1
 	</select>
-	
+
 	<select id="getNextBlog" parameterType="Integer" resultMap="BlogResult">
 		SELECT * FROM t_blog WHERE id&gt;#{id} ORDER BY id ASC LIMIT 1
 	</select>
-	
-	
-	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into t_blog values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord})
+
+
+	<insert id="add" useGeneratedKeys="true" keyProperty="id"
+		parameterType="Blog">
+		insert into t_blog
+		values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyWord})
 	</insert>
-	
+
 	<delete id="delete" parameterType="Integer">
-		delete from t_blog where id=#{id}
+		delete from t_blog where
+		id=#{id}
 	</delete>
 </mapper> 

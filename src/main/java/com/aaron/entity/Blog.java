@@ -1,5 +1,6 @@
 package com.aaron.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +10,9 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class Blog {
+public class Blog implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Integer id; // 编号
 	private String title; // 博客标题
 	private String summary; // 摘要
@@ -106,7 +108,10 @@ public class Blog {
 	public void setImagesList(List<String> imagesList) {
 		this.imagesList = imagesList;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", releaseDate=" + releaseDate + ", blogType=" + blogType
+				+ ", releaseDateStr=" + releaseDateStr + "]";
+	}
 	
 }

@@ -1,11 +1,15 @@
 package com.aaron.entity;
 
+import java.io.Serializable;
+
 /**
+ * 
  * 博主实体
- * @author aaron_小锋
  *
  */
-public class Blogger {
+public class Blogger implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	private Integer id; // 编号
 	private String userName; // 用户名
@@ -57,7 +61,11 @@ public class Blogger {
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
 	}
+	@Override
+	public String toString() {
+		return "Blogger [id=" + id + ", userName=" + userName + ", password="
+				+ password + "]";
+	}
 	
-    
 	
 }
