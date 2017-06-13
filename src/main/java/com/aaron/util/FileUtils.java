@@ -16,6 +16,9 @@ import java.util.Date;
  * @package_name com.aaron.util
  */
 public class FileUtils {
+	
+	private static final String FILE_SEP = File.separator;
+	
     /**
      * 文件copy方法
      * @param src
@@ -51,9 +54,9 @@ public class FileUtils {
      */
     public static String saveFile(String fileName,InputStream content,String filePath) throws IOException {
         FileOutputStream fos = null;
-        StringBuffer contentPath =  new StringBuffer("");; // 上下文地址
+        StringBuffer contentPath =  new StringBuffer(""); // 上下文地址
         try {
-            contentPath.append("/");     
+            contentPath.append(FILE_SEP);     
             contentPath.append(fileName); 
             
             File pictureFile = new File(filePath + contentPath.toString());
