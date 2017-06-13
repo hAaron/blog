@@ -18,10 +18,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="countList" resultMap="BlogResult">
-		SELECT
+		<!-- SELECT
 		DATE_FORMAT(releaseDate,'%Y年%m月') AS releaseDateStr ,COUNT(*) AS
 		blogCount FROM t_blog GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月') ORDER
-		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC;
+		BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC; -->
+		<!-- TODO 暂时解决乱码问题 -->
+		SELECT
+		DATE_FORMAT(releaseDate, '%Y-%m') AS releaseDateStr,
+		COUNT(*) AS blogCount
+		FROM
+			t_blog
+		GROUP BY
+			DATE_FORMAT(releaseDate, '%Y-%m')
+		ORDER BY
+			DATE_FORMAT(releaseDate, '%Y-%m') DESC;
 	</select>
 
 	<select id="list" parameterType="Map" resultMap="BlogResult">
@@ -34,7 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and typeId = #{typeId}
 			</if>
 			<if test="releaseDateStr!=null and releaseDateStr!='' ">
-				and DATE_FORMAT(releaseDate,'%Y年%m月') = #{releaseDateStr}
+				<!-- and DATE_FORMAT(releaseDate,'%Y年%m月') = #{releaseDateStr} -->
+				and DATE_FORMAT(releaseDate,'%Y-%m') = #{releaseDateStr}
 			</if>
 		</where>
 		order by releaseDate desc
@@ -53,7 +64,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and typeId = #{typeId}
 			</if>
 			<if test="releaseDateStr!=null and releaseDateStr!='' ">
-				and DATE_FORMAT(releaseDate,'%Y年%m月') = #{releaseDateStr}
+				<!-- and DATE_FORMAT(releaseDate,'%Y年%m月') = #{releaseDateStr} -->
+				and DATE_FORMAT(releaseDate,'%Y-%m') = #{releaseDateStr}
 			</if>
 		</where>
 	</select>

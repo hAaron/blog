@@ -10,7 +10,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
-
+<%String contextPath = "http://"+request.getServerName()+":"+request.getLocalPort()+request.getContextPath();%>
 <script type="text/javascript" charset="gbk" src="${pageContext.request.contextPath}/static/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="gbk" src="${pageContext.request.contextPath}/static/ueditor/ueditor.all.min.js"> </script>
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -82,8 +82,27 @@
  <script type="text/javascript">
 
     //实例化编辑器
+    //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-    var ue = UE.getEditor('proFile');
+    //编辑器资源文件根路径 最好在ueditor.config.js中配置
+	window.UEDITOR_HOME_URL = "/static/ueditor/";
+	//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	var ue = UE.getEditor('editor',{initialFrameHeight: 500,initialFrameWidth:800,maximumWords:3000,elementPathEnabled:false});
+	//复写UEDITOR的getActionUrl 方法,定义自己的Action
+	UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+	UE.Editor.prototype.getActionUrl = function(action) {
+	    if (action == 'uploadimage' || action == 'uploadfile') {
+	        var id = $('#carInfoId').val();
+	    	   return '<%=contextPath %>/ueditor/fileupload/upload.do';
+	    } else {
+	        return this._bkGetActionUrl.call(this, action);
+	    }
+	};
+	// 复写UEDITOR的getContentLength方法 解决富文本编辑器中一张图片或者一个文件只能算一个字符的问题,可跟数据库字符的长度配合使用
+	UE.Editor.prototype._bkGetContentLength = UE.Editor.prototype.getContentLength;
+	UE.Editor.prototype.getContentLength = function(){
+		return this.getContent().length;
+	}
 
     ue.addListener("ready",function(){
         //通过ajax请求数据
