@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 /**
  * Redis工具类 注意：使用redis工具类，实现序列化接口； 注意redis 版本
  * 
@@ -19,14 +21,18 @@ import org.springframework.data.redis.core.ValueOperations;
  */
 public class RedisUtil {
 	// private Logger logger = LoggerFactory.getLogger(RedisUtil.class);
-	private RedisTemplate<Serializable, Object> redisTemplate;
+	private static RedisTemplate<Serializable, Object> redisTemplate;
 
+	static {
+		redisTemplate = SpringContextHolder.getBean(RedisTemplate.class);
+	}
+	
 	/**
 	 * 批量删除对应的value
 	 * 
 	 * @param keys
 	 */
-	public void remove(final String... keys) {
+	public static void remove(final String... keys) {
 		for (String key : keys) {
 			remove(key);
 		}
@@ -37,7 +43,7 @@ public class RedisUtil {
 	 * 
 	 * @param pattern
 	 */
-	public void removePattern(final String pattern) {
+	public static void removePattern(final String pattern) {
 		Set<Serializable> keys = redisTemplate.keys(pattern);
 		if (keys.size() > 0)
 			redisTemplate.delete(keys);
@@ -48,7 +54,7 @@ public class RedisUtil {
 	 * 
 	 * @param key
 	 */
-	public void remove(final String key) {
+	public static void remove(final String key) {
 		if (exists(key)) {
 			redisTemplate.delete(key);
 		}
@@ -60,7 +66,7 @@ public class RedisUtil {
 	 * @param key
 	 * @return
 	 */
-	public boolean exists(final String key) {
+	public static boolean exists(final String key) {
 		return redisTemplate.hasKey(key);
 	}
 
@@ -70,7 +76,7 @@ public class RedisUtil {
 	 * @param key
 	 * @return
 	 */
-	public Object get(final String key) {
+	public static Object get(final String key) {
 		Object result = null;
 		ValueOperations<Serializable, Object> operations = redisTemplate
 				.opsForValue();
@@ -85,7 +91,7 @@ public class RedisUtil {
 	 * @param value
 	 * @return
 	 */
-	public boolean set(final String key, Object value) {
+	public static boolean set(final String key, Object value) {
 		boolean result = false;
 		try {
 			ValueOperations<Serializable, Object> operations = redisTemplate
@@ -105,7 +111,7 @@ public class RedisUtil {
 	 * @param value
 	 * @return
 	 */
-	public boolean set(final String key, Object value, Long expireTime) {
+	public static boolean set(final String key, Object value, Long expireTime) {
 		boolean result = false;
 		try {
 			ValueOperations<Serializable, Object> operations = redisTemplate
@@ -119,8 +125,4 @@ public class RedisUtil {
 		return result;
 	}
 
-	public void setRedisTemplate(
-			RedisTemplate<Serializable, Object> redisTemplate) {
-		this.redisTemplate = redisTemplate;
-	}
 }
