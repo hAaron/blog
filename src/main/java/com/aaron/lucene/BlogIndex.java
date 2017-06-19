@@ -44,7 +44,7 @@ import com.aaron.util.StringUtil;
 public class BlogIndex {
 
 	private Directory dir=null;
-	
+	private static final String  LUCENE_PATH = "E://temp//lucene";
 
 	/**
 	 * »ñÈ¡IndexWriterÊµÀý
@@ -52,7 +52,7 @@ public class BlogIndex {
 	 * @throws Exception
 	 */
 	private IndexWriter getWriter()throws Exception{
-		dir=FSDirectory.open(Paths.get("E://temp//lucene"));
+		dir=FSDirectory.open(Paths.get(LUCENE_PATH));
 		SmartChineseAnalyzer analyzer=new SmartChineseAnalyzer();
 		IndexWriterConfig iwc=new IndexWriterConfig(analyzer);
 		IndexWriter writer=new IndexWriter(dir, iwc);
@@ -110,7 +110,7 @@ public class BlogIndex {
 	 * @throws Exception
 	 */
 	public List<Blog> searchBlog(String q)throws Exception{
-		dir=FSDirectory.open(Paths.get("E://temp//lucene"));
+		dir=FSDirectory.open(Paths.get(LUCENE_PATH));
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher is=new IndexSearcher(reader);
 		BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
