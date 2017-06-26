@@ -11,7 +11,7 @@ import com.aaron.util.PropertiesLoader;
  * @version 1.0
  * @package_name org.aaron.test
  */
-public class TestMain {
+public class TestConfigProperties {
 	
 	public static void main(String[] args) {
 		PropertiesLoader loader = new PropertiesLoader("/config.properties");
