@@ -61,12 +61,12 @@ public class LogIntercepter implements HandlerInterceptor {
 		log.setRemoteAddr(request.getRemoteAddr());
 		log.setUserAgent(request.getHeader("user-agent"));
 		log.setRequestUri(request.getRequestURI());
-		log.setParams(request.getParameterMap());
+		//log.setParams(request.getParameterMap());
 		log.setMethod(request.getMethod());
 		
 		
 		// 保存日志
-		SysLog.saveLog(log);
+		//SysLog.saveLog(log);
 
 		// 打印JVM信息。
 		if (logger.isDebugEnabled()) {

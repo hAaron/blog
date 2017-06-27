@@ -1,30 +1,88 @@
 package com.aaron.entity.sys;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
 /**
- * 日志表
  * 
  * @author Aaron
- * @date 2017年6月26日
+ * @date 2017年6月27日
  * @version 1.0
  * @package_name com.aaron.entity.sys
  */
-public class SysLog {
+public class SysLog implements Serializable {
+
+	private Integer id;
+
+	/**
+	 * 日志类型（1：正常；2：异常）
+	 */
+	private String type;
+
+	/**
+	 * 操作IP地址
+	 */
+	private String remoteAddr;
+
+	/**
+	 * 用户代理
+	 */
+	private String userAgent;
+
+	/**
+	 * 请求URI
+	 */
+	private String requestUri;
+
+	/**
+	 * 操作方式
+	 */
+	private String method;
+
+	/**
+	 * 操作提交的数据
+	 */
+	private String params;
+
+	/**
+	 * 异常信息
+	 */
+	private String exception;
+
+	/**
+	 * 0:不删除 1：删除
+	 */
+	private String isDelete;
+
+	/**
+	 * 创建者
+	 */
+	private String createBy;
+
+	/**
+	 * 创建时间
+	 */
+	private Date createDate;
+
+	/**
+	 * 修改者
+	 */
+	private String updateBy;
+
+	/**
+	 * 修改时间
+	 */
+	private Date updateDate;
 
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private String type; // 日志类型（1：接入日志；2：错误日志）
-	private String remoteAddr; // 操作用户的IP地址
-	private String requestUri; // 操作的URI
-	private String method; // 操作的方式
-	private String params; // 操作提交的数据
-	private String userAgent; // 操作用户代理信息
-	private String exception; // 异常信息
 
-	private Date beginDate; // 开始日期
-	private Date endDate; // 结束日期
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getType() {
 		return type;
@@ -40,6 +98,14 @@ public class SysLog {
 
 	public void setRemoteAddr(String remoteAddr) {
 		this.remoteAddr = remoteAddr;
+	}
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
 	}
 
 	public String getRequestUri() {
@@ -66,14 +132,6 @@ public class SysLog {
 		this.params = params;
 	}
 
-	public String getUserAgent() {
-		return userAgent;
-	}
-
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
-
 	public String getException() {
 		return exception;
 	}
@@ -82,58 +140,79 @@ public class SysLog {
 		this.exception = exception;
 	}
 
-	public Date getBeginDate() {
-		return beginDate;
+	public String getIsDelete() {
+		return isDelete;
 	}
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public String getCreateBy() {
+		return createBy;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	@Override
+	public boolean equals(Object that) {
+		if (this == that) {
+			return true;
+		}
+		if (that == null) {
+			return false;
+		}
+		if (getClass() != that.getClass()) {
+			return false;
+		}
+		SysLog other = (SysLog) that;
+		return (this.getId() == null ? other.getId() == null : this.getId()
+				.equals(other.getId()));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+		return result;
 	}
 
 	// 日志类型（1：接入日志；2：错误日志）
 	public static final String TYPE_ACCESS = "1";
 	public static final String TYPE_EXCEPTION = "2";
 
-	/**
-	 * 设置请求参数
-	 * 
-	 * @param paramMap
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void setParams(Map paramMap) {
-		if (paramMap == null) {
-			return;
-		}
-		StringBuilder params = new StringBuilder();
-		for (Map.Entry<String, String[]> param : ((Map<String, String[]>) paramMap)
-				.entrySet()) {
-			params.append(("".equals(params.toString()) ? "" : "&")
-					+ param.getKey() + "=");
-			String paramValue = (param.getValue() != null
-					&& param.getValue().length > 0 ? param.getValue()[0] : "");
-			// params.append(StringUtil.abbr(StringUtil.endsWithIgnoreCase(
-			// param.getKey(), "password") ? "" : paramValue, 100));
-			// TODO
-			params.append(paramValue);
-		}
-		this.params = params.toString();
-	}
-
 	@Override
 	public String toString() {
-		return "日志参数SysLog [type=" + type + ", remoteAddr=" + remoteAddr
-				+ ", requestUri=" + requestUri + ", method=" + method + "]";
+		return "日志信息SysLog [type=" + type + ", remoteAddr=" + remoteAddr
+				+ ", requestUri=" + requestUri + ", method=" + method
+				+ ", params=" + params + ", exception=" + exception + "]";
 	}
+
 }

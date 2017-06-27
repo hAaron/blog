@@ -79,13 +79,12 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 
-	<!-- 配置日志切面 -->
-	<aop:config>
-		<aop:pointcut id="logIntercepter" expression="execution(* com.aaron.dao.*.*(..))" />
-	</aop:config>
-
 	<bean id="springContextHolder" class=" com.aaron.util.SpringContextHolder" />
 
 	<!-- 自动扫描 -->
 	<context:component-scan base-package="com.aaron.service" />
+
+	<!-- 加入Aspectj配置 -->
+	<aop:aspectj-autoproxy />
+	<bean id="logAspect" class="com.aaron.aspect.LogAspect" />
 </beans>

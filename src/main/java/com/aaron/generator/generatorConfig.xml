@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration    
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+  
+<generatorConfiguration>  
+  
+    <context id="tables" targetRuntime="MyBatis3">  
+        <plugin type="com.aaron.generator.MyEqualsHashCodePlugin"></plugin>  
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>  
+          
+        <!-- import mapper -->  
+        <!-- <plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">  
+            <property name="fileName" value="GeneratedMapperConfig.xml" />  
+            <property name="targetPackage" value="mapper" />  
+            <property name="targetProject" value="C:\www\fuiou\mybatiesGenPro\src" />  
+        </plugin>   -->
+          
+        <!-- 是否去除自动生成的注释 -->  
+        <commentGenerator>  
+            <property name="suppressAllComments" value="true" />  
+            <property name="suppressDate" value="false" />  
+        </commentGenerator>  
+          
+        <!-- jdbc连接配置 -->  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"   
+            connectionURL="jdbc:mysql://localhost:3306/db_blog3"  
+            userId="root" password="1234">  
+        </jdbcConnection>  
+          
+        <!-- java类型配置 -->  
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>  
+  
+        <!-- generate Model -->  
+        <javaModelGenerator targetPackage="com.aaron.entity.sys"   
+            targetProject="E:\JavaProject\ylprotrunk\blog\src\main\java">  
+            <property name="enableSubPackages" value="true" />  
+        </javaModelGenerator>  
+  
+        <!-- generate xml -->  
+        <sqlMapGenerator targetPackage="com.aaron.mappers"   
+            targetProject="E:\JavaProject\ylprotrunk\blog\src\main\resources">  
+            <property name="enableSubPackages" value="true" />  
+        </sqlMapGenerator>  
+  
+        <!-- generate dao -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.aaron.dao"   
+            targetProject="E:\JavaProject\ylprotrunk\blog\src\main\java">  
+            <property name="enableSubPackages" value="true" />  
+        </javaClientGenerator>  
+        <table tableName="SYS_LOG" domainObjectName="SysLog"   
+            enableCountByExample="false" enableSelectByExample="false"   
+            enableDeleteByExample="false" enableUpdateByExample="false"></table>  
+    </context>  
+</generatorConfiguration>    
