@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContextAware;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候中取出ApplicaitonContext.
+ * 注意：需要在spring-context.xml 配置bean 节点
  * 
  * @author Aaron
  * @date 2017年6月14日

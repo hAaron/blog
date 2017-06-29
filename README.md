@@ -22,7 +22,7 @@ http://localhost:8080/blog/index.do 首页
 注意：
 
 > 1.如果遇到图片上传问题，先检查一下Nginx服务器是否开启
-> 
+
 	
 加载spring配置文件时
 
@@ -30,6 +30,9 @@ http://localhost:8080/blog/index.do 首页
     public void setApplicationContext(ApplicationContext context) throws BeansException 方法，获得ApplicationContext对象。
     前提必须在Spring配置文件中指定该类。 
 	<bean id="springContextHolder" class=" com.aaron.util.SpringContextHolder" />  
+
+日志记录
+	SpringAop 处理日志，保存日志表中(注意如何获取request请求对象，AOP本身和Servlet无关)
 
 
 技术栈
@@ -51,6 +54,8 @@ redis
 	2017年6月12日	spring整合redis
 	2017年6月13日	图片上传到nginx外部服务器
 	2017年6月14日	更改sping加载bean方式 SpringContextHolder
+	2017年6月26日    新增日志记录
+	2017年6月27日    新增日志管理界面
 
 启动项目：
 	先开启服务 nginx，redis

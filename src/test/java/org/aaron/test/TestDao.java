@@ -27,9 +27,13 @@ public class TestDao {
 	@Resource
 	private BlogDao blogDao;
 
+	/**
+	 * ≤‚ ‘≤È—Ø
+	 */
 	@Test
 	public void testQuery() {
-//		List<Blog> list = blogDao.list(new HashMap<String, Object>());
-//		System.out.println(list);
+		List<Blog> list = blogDao.list(new HashMap<String, Object>());
+		System.out.println(list);
 	}
+	
 }

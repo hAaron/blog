@@ -130,7 +130,7 @@ public class LogAspect {
 	}
 
 	/**
-	 * 抽取公共方法
+	 * 抽取公共方法 添加日志记录
 	 * 
 	 * @param joinPoint
 	 */
