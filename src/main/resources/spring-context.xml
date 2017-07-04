@@ -19,6 +19,7 @@
 			<list>
 				<value>classpath:config.properties</value>
 				<value>classpath:dbconfig.properties</value>
+				<value>classpath:dubbo.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -79,7 +80,7 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 
-	<bean id="springContextHolder" class=" com.aaron.util.SpringContextHolder" />
+	<bean id="springContextHolder" class="com.aaron.util.SpringContextHolder" />
 
 	<!-- 自动扫描 -->
 	<context:component-scan base-package="com.aaron.service" />
