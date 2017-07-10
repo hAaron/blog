@@ -32,5 +32,5 @@ public class FileConstants {
 	 * 获取本地ip地址
 	 */
 	public static String LOCAL_IP = loader.getProperty("local_ip");
-
+	
 }

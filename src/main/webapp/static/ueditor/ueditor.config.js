@@ -23,7 +23,7 @@
     //alert("URL:" + URL);
     //alert("window.UEDITOR_HOME_URL:" + window.UEDITOR_HOME_URL);
     //alert("getUEBasePath():" + getUEBasePath());
-    /**
+    /** 
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
      */
     window.UEDITOR_CONFIG = {

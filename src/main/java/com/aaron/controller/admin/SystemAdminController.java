@@ -1,5 +1,6 @@
 package com.aaron.controller.admin;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.aaron.constant.FileConstants;
 import com.aaron.entity.Blog;
 import com.aaron.entity.BlogType;
 import com.aaron.entity.Blogger;
@@ -55,6 +57,8 @@ public class SystemAdminController {
 		ServletContext application=RequestContextUtils.getWebApplicationContext(request).getServletContext();
 		Blogger blogger=bloggerService.find(); // 查询博主信息
 		blogger.setPassword(null);
+		//博主头像从nginx服务器上取
+		blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
 		application.setAttribute("blogger", blogger);
 		
 		List<BlogType> blogTypeCountList=blogTypeService.countList(); // 查询博客类别以及博客的数量

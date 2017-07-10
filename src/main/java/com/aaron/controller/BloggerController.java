@@ -1,5 +1,7 @@
 package com.aaron.controller;
 
+import java.io.File;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aaron.constant.FileConstants;
 import com.aaron.entity.Blogger;
 import com.aaron.service.BloggerService;
 import com.aaron.util.CryptographyUtil;

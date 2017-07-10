@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.aaron.constant.FileConstants;
 import com.aaron.entity.Blogger;
 import com.aaron.service.BloggerService;
 import com.aaron.util.CryptographyUtil;
@@ -46,7 +47,8 @@ public class BloggerAdminController {
 		if(!imageFile.isEmpty()){
 			String filePath=request.getServletContext().getRealPath("/");
 			String imageName=DateUtil.getCurrentDateStr()+"."+imageFile.getOriginalFilename().split("\\.")[1];
-			imageFile.transferTo(new File(filePath+"/static/userImages/"+imageName));
+			//imageFile.transferTo(new File(filePath+"/static/userImages/"+imageName));
+			imageFile.transferTo(new File(FileConstants.fileuploadPath+File.separator+imageName));
 			blogger.setImageName(imageName);
 		}
 		int resultTotal=bloggerService.update(blogger);
@@ -69,6 +71,8 @@ public class BloggerAdminController {
 	@RequestMapping("/find")
 	public String find(HttpServletResponse response)throws Exception{
 		Blogger blogger=bloggerService.find();
+		//博主头像从nginx服务器上取
+		blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
 		JSONObject jsonObject=JSONObject.fromObject(blogger);
 		ResponseUtil.write(response, jsonObject);
 		return null;

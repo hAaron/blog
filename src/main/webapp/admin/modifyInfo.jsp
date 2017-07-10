@@ -52,7 +52,7 @@
 	   		</tr>
 	   		<tr>
 	   			<td>昵称：</td>
-	   			<td><input type="text" id="nickName" name="nickName"  style="width: 200px;"/></td>
+	   			<td><input type="text" id="nickName" name="nickName"  value="${currentUser.nickName }" style="width: 200px;"/></td>
 	   		</tr>
 	   		<tr>
 	   			<td>个性签名：</td>
@@ -60,13 +60,16 @@
 	   		</tr>
 	   		<tr>
 	   			<td>个人头像：</td>
-	   			<td><input type="file" id="imageFile" name="imageFile" style="width: 400px;"/></td>
+	   			<td>
+				<img src="${currentUser.imageName }"/><br>
+	   			<input type="file" id="imageFile" name="imageFile" style="width: 400px;"/>
+				</td>
 	   		</tr>
 	   		<tr>
 	   			<td valign="top">个人简介：</td>
 	   			<td>
-					   <script id="proFile" type="text/plain" style="width:100%;height:500px;"></script>
-					   <input type="hidden" id="pF" name="proFile"/>
+					    <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+						<!-- <input type="hidden" id="pF" name="proFile"/> -->
 	   			</td>
 	   		</tr>
 	   		<tr>
@@ -116,7 +119,7 @@
                 	$("#nickName").val(result.nickName);
                 	$("#sign").val(result.sign);
                 	$("#nickName").val(result.nickName);
-       				UE.getEditor('proFile').setContent(result.proFile);
+       				UE.getEditor('editor').setContent(result.proFile);
                 }
             }
         );

@@ -1,5 +1,7 @@
 package com.aaron.realm;
 
+import java.io.File;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
@@ -11,6 +13,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+import com.aaron.constant.FileConstants;
 import com.aaron.entity.Blogger;
 import com.aaron.service.BloggerService;
 
@@ -40,6 +43,8 @@ public class MyRealm extends AuthorizingRealm{
 		String userName=(String)token.getPrincipal();
 		Blogger blogger=bloggerService.getByUserName(userName);
 		if(blogger!=null){
+			//博主头像从nginx服务器上取
+			blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
 			SecurityUtils.getSubject().getSession().setAttribute("currentUser", blogger); // 当前用户信息存到session中
 			AuthenticationInfo authcInfo=new SimpleAuthenticationInfo(blogger.getUserName(),blogger.getPassword(),"xx");
 			return authcInfo;
