@@ -58,7 +58,11 @@ public class BloggerController {
 	@RequestMapping("/aboutMe")
 	public ModelAndView aboutMe()throws Exception{
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("blogger",bloggerService.find());
+		Blogger blogger = bloggerService.find();
+		//博主头像从nginx服务器上取
+		//blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
+		
+		mav.addObject("blogger",blogger);
 		mav.addObject("mainPage", "foreground/blogger/info.jsp");
 		mav.addObject("pageTitle","关于博主_Java开源博客系统");
 		mav.setViewName("mainTemp");

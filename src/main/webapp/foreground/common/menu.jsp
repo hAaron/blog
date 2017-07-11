@@ -29,9 +29,6 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
 		      <ul class="nav navbar-nav">
-		        <!-- <li><a href="#"><font color="black"><strong>aaron官网</strong></font></a></li> -->
-		        <!-- <li><a href="#"><font color="black"><strong>Java学习路线图</strong></font></a></li> -->
-		        <!-- <li><a href="#"><font color="red"><strong>aaron VIP项目</strong></font></a></li> -->
 		        <li><a href="${pageContext.request.contextPath}/blogger/aboutMe.html"><font color="black"><strong>关于博主</strong></font></a></li>
 		        <li><a href="${pageContext.request.contextPath}/download.html"><font color="black"><strong>本站源码下载</strong></font></a></li>
 		      </ul>

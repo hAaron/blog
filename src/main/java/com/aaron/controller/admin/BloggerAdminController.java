@@ -72,7 +72,7 @@ public class BloggerAdminController {
 	public String find(HttpServletResponse response)throws Exception{
 		Blogger blogger=bloggerService.find();
 		//博主头像从nginx服务器上取
-		blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
+		//blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
 		JSONObject jsonObject=JSONObject.fromObject(blogger);
 		ResponseUtil.write(response, jsonObject);
 		return null;

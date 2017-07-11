@@ -21,7 +21,7 @@
 	function submitData(){
 		var nickName=$("#nickName").val();
 		var sign=$("#sign").val();
-		var proFile=UE.getEditor('proFile').getContent();
+		var proFile=UE.getEditor('editor').getContent();
 		
 		if(nickName==null || nickName==''){
 			alert("请输入昵称！");
@@ -69,7 +69,7 @@
 	   			<td valign="top">个人简介：</td>
 	   			<td>
 					    <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
-						<!-- <input type="hidden" id="pF" name="proFile"/> -->
+						<input type="hidden" id="pF" name="proFile"/>
 	   			</td>
 	   		</tr>
 	   		<tr>

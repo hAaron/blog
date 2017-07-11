@@ -58,7 +58,7 @@ public class SystemAdminController {
 		Blogger blogger=bloggerService.find(); // 查询博主信息
 		blogger.setPassword(null);
 		//博主头像从nginx服务器上取
-		blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
+		//blogger.setImageName(FileConstants.httpPath+File.separator+blogger.getImageName());
 		application.setAttribute("blogger", blogger);
 		
 		List<BlogType> blogTypeCountList=blogTypeService.countList(); // 查询博客类别以及博客的数量
