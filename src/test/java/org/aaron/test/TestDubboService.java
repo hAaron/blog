@@ -27,17 +27,17 @@ public class TestDubboService {
 	@Test
 	public void testService() throws IOException {
 
-		DubboService dubboService = SpringContextHolder
-				.getBean(DubboService.class);
-		String hello = dubboService.sayHello("asdf");
-		System.out.println(hello);
-
-		List list = dubboService.getUsers();
-		if (list != null && list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}
-		}
+//		DubboService dubboService = SpringContextHolder
+//				.getBean(DubboService.class);
+//		String hello = dubboService.sayHello("asdf");
+//		System.out.println(hello);
+//
+//		List list = dubboService.getUsers();
+//		if (list != null && list.size() > 0) {
+//			for (int i = 0; i < list.size(); i++) {
+//				System.out.println(list.get(i));
+//			}
+//		}
 		//System.in.read();
 	}
 
