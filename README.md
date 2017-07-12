@@ -56,6 +56,33 @@ redis
 	2017年6月14日	更改sping加载bean方式 SpringContextHolder
 	2017年6月26日    新增日志记录
 	2017年6月27日    新增日志管理界面
+	2017年7月3日     新增处理dubbo接口
+	2017年7月5日     新增nginx反向代理
 
 启动项目：
 	先开启服务 nginx，redis
+
+
+nginx 代理两台服务器
+
+upstream blog.aaron.com {
+		server 192.168.1.161:8080;
+		server 192.168.1.161:8888;
+	}
+server {
+        listen       8188;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   E:\\temp\\blog\\images;
+			
+			#反向代理的地址
+            index  index.html index.htm;     
+            proxy_pass        http://blog.aaron.com;     
+            proxy_set_header  X-Real-IP  $remote_addr;     
+            client_max_body_size  100m;  
+        }
