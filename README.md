@@ -86,3 +86,23 @@ server {
             proxy_set_header  X-Real-IP  $remote_addr;     
             client_max_body_size  100m;  
         }
+
+nginx 使用sticky方式处理session共享
+
+nginx安装
+
+	解压：
+	tar -xzvf nginx-1.8.0.tar.gz 
+	进入安装目录：
+	cd nginx-1.8.0 
+	配置编译信息：
+	./configure --prefix=/usr/local/nginx --add-module=/usr/local/nginx-sticky-module 
+	编译： make（不要make install） 
+
+nginx第三方模块安装 nginx-sticky-module 
+
+	解压：nginx-goodies-nginx-sticky-module-ng-08a395c66e42.tar.gz 
+	重命名：nginx-sticky-module 
+	进入安装目录：cd nginx-sticky-module 
+	配置编译信息：
+	./configure --prefix=/usr/local/nginx --add-module=/usr/local/nginx-sticky-module 
