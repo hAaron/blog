@@ -10,6 +10,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/static/layer/layer.js" type=text/javascript></script>
 
 <script type="text/javascript">
 
@@ -40,6 +41,42 @@
 	   });
 	}
 	
+	function exportSysLog(){
+		var selectedRows=$("#dg").datagrid("getSelections");
+		if(selectedRows.length==0){
+			 $.messager.alert("系统提示","默认导出日志全部信息");
+		 }
+		 var strIds=[];
+		 for(var i=0;i<selectedRows.length;i++){
+			 strIds.push(selectedRows[i].id);
+		 }
+		 var ids=strIds.join(",");
+		 $.messager.confirm("系统提示","您确定要导出这些数据吗？",function(r){
+				if(r){
+					$.post("${pageContext.request.contextPath}/ei/sysLog/export.do",{ids:ids},function(result){
+						if(result.success){
+							 $.messager.alert("系统提示","数据已成功导出！");
+							 $("#dg").datagrid("reload");
+						}else{
+							$.messager.alert("系统提示","数据导出失败！");
+						}
+					},"json");
+				} 
+	   });
+	}
+	
+	$(document).ready(function(){
+		$("#importButton").click(function(){
+			layer.open({
+		        type: 2,
+		        title: '从Excel文件导入日志信息',
+		        shadeClose: true, //点击遮罩关闭层
+		        area : ['23em' , '18em'],
+		        content: '${pageContext.request.contextPath}/ei/getExcelPage.do?parent=syslog'
+		    });
+		});
+	});
+
 	function openSysLogDetailDialog(){
 		var selectedRows=$("#dg").datagrid("getSelections");
 		 if(selectedRows.length!=1){
@@ -76,6 +113,10 @@
  	<div>
  		<a href="javascript:openSysLogDetailDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">查看</a>
  		<a href="javascript:deleteSysLog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+ 		<a href="javascript:exportSysLog()" class="easyui-linkbutton" iconCls="icon-redo" plain="true">导出</a>
+ 		<!-- <a href="javascript:importSysLog()" id="importButton" class="easyui-linkbutton" iconCls="icon-undo" plain="true">导入</a> -->
+ 			<input class="button1" type="button" id="importButton" value="从Excel导入" style="cursor:hand;"></input>
+ 		
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  </div>
  
@@ -100,14 +141,6 @@
    		<tr>
    			<td>数据参数：</td>
    			<td><input type="text" id="params" name="params" class="easyui-validatebox" readonly style="width: 300px"/></td>
-   		</tr>
-   		<tr>
-   			<td>请求地址：</td>
-   			<td><input type="text" id="requestUri" name="requestUri" class="easyui-validatebox" readonly style="width: 300px"/></td>
-   		</tr>
-   		<tr>
-   			<td>操作方式：</td>
-   			<td><input type="text" id="method" name="method" class="easyui-validatebox" readonly style="width: 300px"/></td>
    		</tr>
    		<tr>
    			<td>创建时间：</td>
