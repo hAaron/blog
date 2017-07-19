@@ -3,8 +3,13 @@ package com.aaron.controller.common;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +27,7 @@ import com.aaron.entity.sys.SysLog;
 import com.aaron.service.SysLogService;
 import com.aaron.util.FileOperationTool;
 import com.aaron.util.ResponseUtil;
+import com.aaron.util.StringUtil;
 
 /**
  * 文件导入导出
@@ -79,17 +85,39 @@ public class ExportOrImportController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/syslog/export")
-	public String exportSysLog(@RequestParam(value = "ids") String ids,
+	public String exportSysLog(
+			@RequestParam(value = "ids", required = false) String ids,
 			HttpServletResponse response) throws Exception {
-		String[] idsStr = ids.split(",");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/vnd.ms-excel");
+		// 报头用于提供一个推荐的文件名，并强制浏览器显示保存对话框
+		// attachment表示以附件方式下载。如果要在页面中打开，则改为 inline
+		OutputStream out = response.getOutputStream();
+		response.reset();
+		String finalFileName = String.valueOf(System.currentTimeMillis());
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + finalFileName + "\"");
+		List<SysLog> sysLogs = new ArrayList<SysLog>();
 		SysLog sysLog = new SysLog();
-		for (int i = 0; i < idsStr.length; i++) {
-			// sysLog = sysLogService.findLogById(Integer.valueOf(idsStr[i]));
-			// sysLogService.removeLog(sysLog);
+
+		logger.info("ids..." + StringUtil.isBlank(ids));
+		if (StringUtil.isBlank(ids)) {
+			sysLogs = sysLogService.findAll();
+		} else {
+			String[] idsStr = ids.split(",");
+			for (int i = 0; i < idsStr.length; i++) {
+				sysLog = sysLogService.findLogById(Integer.valueOf(idsStr[i]));
+				sysLogs.add(sysLog);
+			}
 		}
+
+		sysLogService.exprot(sysLogs, out);
 		JSONObject result = new JSONObject();
 		result.put("success", true);
-		ResponseUtil.write(response, result);
+//		ResponseUtil.write(response, result);
+		
+		((ServletOutputStream) out).println(result.toString());
+		out.flush();
+		out.close();
 		return null;
 	}
 

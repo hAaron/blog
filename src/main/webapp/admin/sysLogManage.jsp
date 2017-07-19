@@ -29,7 +29,7 @@
 		 var ids=strIds.join(",");
 		 $.messager.confirm("系统提示","您确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
 				if(r){
-					$.post("${pageContext.request.contextPath}/admin/sysLog/delete.do",{ids:ids},function(result){
+					$.post("${pageContext.request.contextPath}/admin/syslog/delete.do",{ids:ids},function(result){
 						if(result.success){
 							 $.messager.alert("系统提示","数据已成功删除！");
 							 $("#dg").datagrid("reload");
@@ -53,7 +53,7 @@
 		 var ids=strIds.join(",");
 		 $.messager.confirm("系统提示","您确定要导出这些数据吗？",function(r){
 				if(r){
-					$.post("${pageContext.request.contextPath}/ei/sysLog/export.do",{ids:ids},function(result){
+					$.post("${pageContext.request.contextPath}/ei/syslog/export.do",{ids:ids},function(result){
 						if(result.success){
 							 $.messager.alert("系统提示","数据已成功导出！");
 							 $("#dg").datagrid("reload");

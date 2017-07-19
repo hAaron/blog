@@ -74,8 +74,6 @@ public class SysLog implements Serializable {
 	 */
 	private Date updateDate;
 
-	private static final long serialVersionUID = 1L;
-
 	public Integer getId() {
 		return id;
 	}
@@ -203,10 +201,6 @@ public class SysLog implements Serializable {
 		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
 		return result;
 	}
-
-	// 日志类型（1：接入日志；2：错误日志）
-	public static final String TYPE_ACCESS = "1";
-	public static final String TYPE_EXCEPTION = "2";
 
 	@Override
 	public String toString() {

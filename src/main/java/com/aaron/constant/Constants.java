@@ -19,4 +19,13 @@ public class Constants {
 	 */
 	public static final String DELETE_YES = "1";
 
+	/**
+	 * 日志类型（1：接入日志；2：错误日志）
+	 */
+	public static final String TYPE_ACCESS = "1";
+
+	/**
+	 * 日志类型（1：接入日志；2：错误日志）
+	 */
+	public static final String TYPE_EXCEPTION = "2";
 }

@@ -1,5 +1,6 @@
 package com.aaron.service;
 
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -28,5 +29,7 @@ public interface SysLogService {
 	List<SysLog> list(Map<String, Object> map);
 
 	Long getTotal(Map<String, Object> map);
+
+	void exprot(List<SysLog> sysLogs, OutputStream out);
 	
 }

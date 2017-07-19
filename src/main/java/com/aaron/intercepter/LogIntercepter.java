@@ -15,6 +15,7 @@ import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aaron.constant.Constants;
 import com.aaron.entity.sys.SysLog;
 import com.aaron.util.DateUtil;
 /**
@@ -57,7 +58,7 @@ public class LogIntercepter implements HandlerInterceptor {
 			throws Exception {
 		String requestURL = request.getRequestURL().toString();
 		SysLog log = new SysLog();
-		log.setType(ex == null ? SysLog.TYPE_ACCESS : SysLog.TYPE_EXCEPTION);
+		log.setType(ex == null ? Constants.TYPE_ACCESS : Constants.TYPE_EXCEPTION);
 		log.setRemoteAddr(request.getRemoteAddr());
 		log.setUserAgent(request.getHeader("user-agent"));
 		log.setRequestUri(request.getRequestURI());

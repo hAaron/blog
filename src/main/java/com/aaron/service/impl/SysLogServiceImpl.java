@@ -1,5 +1,12 @@
 package com.aaron.service.impl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +24,8 @@ import com.aaron.constant.FileConstants;
 import com.aaron.dao.SysLogDao;
 import com.aaron.entity.sys.SysLog;
 import com.aaron.service.SysLogService;
+import com.aaron.util.excel.examples1.ExportExcel;
+import com.aaron.util.excel.examples1.Student;
 
 /**
  * 
@@ -37,7 +46,7 @@ public class SysLogServiceImpl implements SysLogService {
 	@Override
 	public int insertLog(SysLog sysLog) {
 		HttpServletRequest request = SysContent.getRequest();
-		sysLog.setType(SysLog.TYPE_ACCESS);
+		sysLog.setType(Constants.TYPE_ACCESS);
 		sysLog.setRemoteAddr(request.getRemoteAddr());
 		sysLog.setUserAgent(request.getHeader("user-agent"));
 		sysLog.setRequestUri(request.getRequestURI());
@@ -83,6 +92,32 @@ public class SysLogServiceImpl implements SysLogService {
 	@Override
 	public Long getTotal(Map<String, Object> map) {
 		return sysLogDao.getTotal(map);
+	}
+
+	@Override
+	public void exprot(List<SysLog> sysLogs, OutputStream out) {
+		ExportExcel<SysLog> ex = new ExportExcel<SysLog>();
+        String[] headers = { "编号", "日志类型", "操作IP地址", "用户代理", "请求URI", "操作方式", "操作提交的数据", "异常信息"
+        		, "删除标识", "创建者", "创建时间", "修改者", "修改时间"};
+        //OutputStream out = null;
+        try {
+        	File file = new File("E://temp//日志信息_"+System.currentTimeMillis()+".xls");
+        	if(file.exists()){
+        		file.createNewFile();
+        	}
+        	//out = new FileOutputStream(file);
+			ex.exportExcel(headers, sysLogs, out);
+			logger.info("####日志信息导出成功");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
