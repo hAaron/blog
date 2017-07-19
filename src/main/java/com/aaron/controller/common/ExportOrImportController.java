@@ -88,14 +88,14 @@ public class ExportOrImportController {
 	public String exportSysLog(
 			@RequestParam(value = "ids", required = false) String ids,
 			HttpServletResponse response) throws Exception {
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/vnd.ms-excel");
-		// 报头用于提供一个推荐的文件名，并强制浏览器显示保存对话框
-		// attachment表示以附件方式下载。如果要在页面中打开，则改为 inline
-		OutputStream out = response.getOutputStream();
-		response.reset();
-		String finalFileName = String.valueOf(System.currentTimeMillis());
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + finalFileName + "\"");
+//		response.setCharacterEncoding("utf-8");
+//		response.setContentType("application/vnd.ms-excel");
+//		// 报头用于提供一个推荐的文件名，并强制浏览器显示保存对话框
+//		// attachment表示以附件方式下载。如果要在页面中打开，则改为 inline
+//		OutputStream out = response.getOutputStream();
+//		response.reset();
+//		String finalFileName = String.valueOf(System.currentTimeMillis());
+//		response.setHeader("Content-Disposition", "attachment; filename=\"" + finalFileName + "\"");
 		List<SysLog> sysLogs = new ArrayList<SysLog>();
 		SysLog sysLog = new SysLog();
 
@@ -110,14 +110,10 @@ public class ExportOrImportController {
 			}
 		}
 
-		sysLogService.exprot(sysLogs, out);
+		sysLogService.exprot(sysLogs);
 		JSONObject result = new JSONObject();
 		result.put("success", true);
-//		ResponseUtil.write(response, result);
-		
-		((ServletOutputStream) out).println(result.toString());
-		out.flush();
-		out.close();
+		ResponseUtil.write(response, result);
 		return null;
 	}
 

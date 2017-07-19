@@ -95,17 +95,17 @@ public class SysLogServiceImpl implements SysLogService {
 	}
 
 	@Override
-	public void exprot(List<SysLog> sysLogs, OutputStream out) {
+	public void exprot(List<SysLog> sysLogs) {
 		ExportExcel<SysLog> ex = new ExportExcel<SysLog>();
         String[] headers = { "编号", "日志类型", "操作IP地址", "用户代理", "请求URI", "操作方式", "操作提交的数据", "异常信息"
         		, "删除标识", "创建者", "创建时间", "修改者", "修改时间"};
-        //OutputStream out = null;
+        OutputStream out = null;
         try {
         	File file = new File("E://temp//日志信息_"+System.currentTimeMillis()+".xls");
         	if(file.exists()){
         		file.createNewFile();
         	}
-        	//out = new FileOutputStream(file);
+        	out = new FileOutputStream(file);
 			ex.exportExcel(headers, sysLogs, out);
 			logger.info("####日志信息导出成功");
 		} catch (IOException e) {
