@@ -44,7 +44,7 @@
 	function exportSysLog(){
 		var selectedRows=$("#dg").datagrid("getSelections");
 		if(selectedRows.length==0){
-			 $.messager.alert("系统提示","默认导出日志全部信息");
+			// $.messager.alert("系统提示","默认导出日志全部信息");
 		 }
 		 var strIds=[];
 		 for(var i=0;i<selectedRows.length;i++){
