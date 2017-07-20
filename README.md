@@ -105,4 +105,17 @@ nginx第三方模块安装 nginx-sticky-module
 	重命名：nginx-sticky-module 
 	进入安装目录：cd nginx-sticky-module 
 	配置编译信息：
-	./configure --prefix=/usr/local/nginx --add-module=/usr/local/nginx-sticky-module 
+	./configure --prefix=/usr/local/nginx --add-module=/usr/local/nginx-sticky-module
+
+Eclipse maven 打包跳过测试类
+
+pom.xml 配置
+
+	<!-- 跳过测试 -->
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<configuration>
+			<skip>true</skip>
+		</configuration>
+	</plugin> 
