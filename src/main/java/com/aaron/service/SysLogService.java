@@ -29,5 +29,6 @@ public interface SysLogService {
 	List<SysLog> list(Map<String, Object> map);
 
 	Long getTotal(Map<String, Object> map);
-
+	
+	public void exprot(List<SysLog> sysLogs);
 }

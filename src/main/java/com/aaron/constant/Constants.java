@@ -28,4 +28,9 @@ public class Constants {
 	 * 日志类型(1：接入日志；2：错误日志)
 	 */
 	public static final String SYOLOG_TYPE_EXCEPTION = "2";
+	
+	/**
+	 * 导出日志信息excel 文件路径 
+	 */
+	public static final String SYS_LOG_PATH = "E://temp//日志信息_"+System.currentTimeMillis()+".xls";
 }

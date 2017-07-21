@@ -93,6 +93,7 @@ public class ExportOrImportController {
 	@RequestMapping("/syslog/export")
 	public String exportSysLog(HttpServletResponse response) throws Exception {
 
+		// 方法1：浏览器下载文件
 		List<SysLog> sysLogs = sysLogService.findAll();
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		// 定义excel列表头
@@ -153,6 +154,9 @@ public class ExportOrImportController {
 			}
 		}
 		ExcelUtils.exportXlsx(response, "日志数据", headNameMap, list);
+
+		// 方法2：自定义本地导出excel文件存放地址
+		// sysLogService.exprot(sysLogs);
 		return null;
 	}
 
