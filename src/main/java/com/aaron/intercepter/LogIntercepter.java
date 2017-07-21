@@ -58,7 +58,7 @@ public class LogIntercepter implements HandlerInterceptor {
 			throws Exception {
 		String requestURL = request.getRequestURL().toString();
 		SysLog log = new SysLog();
-		log.setType(ex == null ? Constants.TYPE_ACCESS : Constants.TYPE_EXCEPTION);
+		log.setType(ex == null ? Constants.SYOLOG_TYPE_ACCESS : Constants.SYOLOG_TYPE_EXCEPTION);
 		log.setRemoteAddr(request.getRemoteAddr());
 		log.setUserAgent(request.getHeader("user-agent"));
 		log.setRequestUri(request.getRequestURI());

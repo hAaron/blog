@@ -30,6 +30,4 @@ public interface SysLogService {
 
 	Long getTotal(Map<String, Object> map);
 
-	void exprot(List<SysLog> sysLogs, OutputStream out);
-	
 }

@@ -51,18 +51,11 @@
 			 strIds.push(selectedRows[i].id);
 		 }
 		 var ids=strIds.join(",");
-		 $.messager.confirm("系统提示","您确定要导出这些数据吗？",function(r){
+		 $.messager.confirm("系统提示","您确定要导出日志信息吗？",function(r){
 				if(r){
-					$.post("${pageContext.request.contextPath}/ei/syslog/export.do",{ids:ids},function(result){
-						if(result.success){
-							 $.messager.alert("系统提示","数据已成功导出！");
-							 $("#dg").datagrid("reload");
-						}else{
-							$.messager.alert("系统提示","数据导出失败！");
-						}
-					},"json");
+					 window.location.href="${pageContext.request.contextPath}/ei/syslog/export.do";
 				} 
-	   });
+	   }); 
 	}
 	
 	$(document).ready(function(){
@@ -115,8 +108,7 @@
  		<a href="javascript:deleteSysLog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
  		<a href="javascript:exportSysLog()" class="easyui-linkbutton" iconCls="icon-redo" plain="true">导出</a>
  		<!-- <a href="javascript:importSysLog()" id="importButton" class="easyui-linkbutton" iconCls="icon-undo" plain="true">导入</a> -->
- 			<input class="button1" type="button" id="importButton" value="从Excel导入" style="cursor:hand;"></input>
- 		
+ 		<input class="button1" type="button" id="importButton" value="从Excel导入" style="cursor:hand;"></input>
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  </div>
  

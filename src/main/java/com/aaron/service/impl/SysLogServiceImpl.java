@@ -46,7 +46,7 @@ public class SysLogServiceImpl implements SysLogService {
 	@Override
 	public int insertLog(SysLog sysLog) {
 		HttpServletRequest request = SysContent.getRequest();
-		sysLog.setType(Constants.TYPE_ACCESS);
+		sysLog.setType(Constants.SYOLOG_TYPE_ACCESS);
 		sysLog.setRemoteAddr(request.getRemoteAddr());
 		sysLog.setUserAgent(request.getHeader("user-agent"));
 		sysLog.setRequestUri(request.getRequestURI());
@@ -94,7 +94,6 @@ public class SysLogServiceImpl implements SysLogService {
 		return sysLogDao.getTotal(map);
 	}
 
-	@Override
 	public void exprot(List<SysLog> sysLogs, OutputStream out) {
 		ExportExcel<SysLog> ex = new ExportExcel<SysLog>();
         String[] headers = { "编号", "日志类型", "操作IP地址", "用户代理", "请求URI", "操作方式", "操作提交的数据", "异常信息"
