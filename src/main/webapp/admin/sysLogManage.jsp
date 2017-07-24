@@ -106,8 +106,8 @@
  	<div>
  		<a href="javascript:openSysLogDetailDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">查看</a>
  		<a href="javascript:deleteSysLog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
- 		<a href="javascript:exportSysLog()" class="easyui-linkbutton" iconCls="icon-redo" plain="true">导出</a>
- 		<a href="#" id="importButton" class="easyui-linkbutton" iconCls="icon-undo" plain="true">导入</a>
+ 		<a href="javascript:exportSysLog()" class="easyui-linkbutton" iconCls="icon-excel" plain="true">导出</a>
+ 		<a href="#" id="importButton" class="easyui-linkbutton" iconCls="icon-excel" plain="true">导入</a>
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  </div>
  
