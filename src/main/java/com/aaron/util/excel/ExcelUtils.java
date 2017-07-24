@@ -30,7 +30,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.aaron.util.DateUtil;
 
 /**
- * Excel工具类 导出
+ * POI方式导出Excel工具类 导出/导入
  * 
  * @author Aaron
  * @date 2017年7月21日
@@ -186,10 +186,12 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * 读取excel
+	 * 从excel文件中读取数据，转换成list集合
 	 * 
 	 * @param path
+	 *            文件路径
 	 * @param startIdx
+	 *            从第{startIdx}行开始读取
 	 * @return
 	 */
 	public static List<List<String>> readXlsx(String path, int startIdx) {
@@ -205,20 +207,24 @@ public class ExcelUtils {
 		return null;
 	}
 
-	@SuppressWarnings("resource")
+	/**
+	 * 从excel文件中读取数据，转换成list集合
+	 * 
+	 * @param is
+	 *            文件流
+	 * @param startIdx
+	 *            从第{startIdx}行开始读取
+	 * @return
+	 */
 	public static List<List<String>> readXlsx(InputStream is, int startIdx) {
 
 		List<List<String>> list = new ArrayList<List<String>>();
-
 		try {
-
 			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
-
 			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
 			if (xssfSheet == null) {
 				return list;
 			}
-
 			int endIdx = xssfSheet.getLastRowNum() + 1;
 			if (endIdx > startIdx) {
 				for (; startIdx < endIdx; startIdx++) {

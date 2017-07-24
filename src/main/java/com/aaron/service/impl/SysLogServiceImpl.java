@@ -115,4 +115,17 @@ public class SysLogServiceImpl implements SysLogService {
 		}
 	}
 
+	@Override
+	public int insertLogs(List<SysLog> sysLogs) {
+		int temp = 0;
+		for (SysLog sysLog2 : sysLogs) {
+			sysLog2.setIsDelete(Constants.DELETE_NO);
+			// 判断是否是管理员
+			sysLog2.setCreateBy(FileConstants.LOCAL_IP);
+			sysLog2.setUpdateBy(FileConstants.LOCAL_IP);
+			sysLogDao.insert(sysLog2);
+			temp ++;
+		}
+		return temp;
+	}
 }

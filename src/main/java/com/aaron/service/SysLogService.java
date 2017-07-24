@@ -31,4 +31,6 @@ public interface SysLogService {
 	Long getTotal(Map<String, Object> map);
 	
 	public void exprot(List<SysLog> sysLogs);
+
+	int insertLogs(List<SysLog> sysLogs);
 }

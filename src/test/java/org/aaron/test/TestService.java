@@ -41,7 +41,7 @@ public class TestService {
 				.getBean(CommentService.class);
 		BlogService blogService = SpringContextHolder
 				.getBean(BlogService.class);
-		/*
+		
 		for (int i = 0; i < 1; i++) {
 			String userIp = "199.147.251.126"; // 获取用户IP
 			comment.setUserIp(userIp);
@@ -55,7 +55,7 @@ public class TestService {
 			blog.setReplyHit(blog.getReplyHit() + 1);
 			blogService.update(blog);
 		}
-		*/
+		
 	}
 
 }

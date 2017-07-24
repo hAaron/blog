@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;  
 import org.springframework.web.multipart.MultipartHttpServletRequest; 
 
-public class FileOperationTool {
+public class FileOperationTools {
 	
 	public static InputStream uploadToStream(HttpServletRequest request,String fileName) throws Exception{
 		MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
@@ -60,7 +60,7 @@ public class FileOperationTool {
                 + new String(realName.getBytes("utf-8"), "ISO8859-1"));
 		BufferedInputStream bis = new BufferedInputStream(from);
 		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-		FileOperationTool.write(bis, bos);
+		FileOperationTools.write(bis, bos);
 		response.flushBuffer();
 	}
 	

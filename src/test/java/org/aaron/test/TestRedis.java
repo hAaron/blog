@@ -40,16 +40,16 @@ public class TestRedis {
 	@Test
 	public void testRe() {
 
-//		String blog_id = "71";
-//		System.out.println(RedisUtil.exists(blog_id));
-//		if (!RedisUtil.exists(blog_id)) {
-//			System.out.println("redis没有，先去数据库查询，然后对象放进缓存");
-//			Blog blog = blogDao.findById(Integer.valueOf(blog_id));
-//			RedisUtil.set(blog_id, blog);
-//		} else {
-//			Blog blog = (Blog) RedisUtil.get(blog_id);
-//			System.out.println("在redis找到" + blog.getTitle());
-//		}
+		String blog_id = "71";
+		System.out.println(RedisUtil.exists(blog_id));
+		if (!RedisUtil.exists(blog_id)) {
+			System.out.println("redis没有，先去数据库查询，然后对象放进缓存");
+			Blog blog = blogDao.findById(Integer.valueOf(blog_id));
+			RedisUtil.set(blog_id, blog);
+		} else {
+			Blog blog = (Blog) RedisUtil.get(blog_id);
+			System.out.println("在redis找到" + blog.getTitle());
+		}
 	}
 
 }

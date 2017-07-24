@@ -1,16 +1,13 @@
 package com.aaron.util.excel.examples1;
+import java.util.Date;
 
 /**
  * 
- * 
  * @author Aaron
- * @date 2017年7月19日
+ * @date 2017年7月24日
  * @version 1.0
  * @package_name com.aaron.util.excel.examples1
  */
-
-import java.util.Date;
-
 public class Student {
     private long id;
     private String name;
@@ -23,7 +20,7 @@ public class Student {
         // TODO Auto-generated constructor stub
     }
 
-    public Student(long id, String name, int age, boolean sex, Date birthday) {
+	public Student(long id, String name, int age, boolean sex, Date birthday) {
         super();
         this.id = id;
         this.name = name;
