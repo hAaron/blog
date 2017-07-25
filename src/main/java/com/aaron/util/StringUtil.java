@@ -4,19 +4,21 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * 字符串工具类
  * 
- * @author
- * 
+ * @author Aaron
+ * @date 2017年7月25日
+ * @version 1.0
+ * @package_name com.aaron.util
  */
 public class StringUtil {
 
 	/**
-	 * 判断是否是空
+	 * 判断源字符串是否为空
 	 * 
 	 * @param str
+	 *            源字符串
 	 * @return
 	 */
 	public static boolean isEmpty(String str) {
@@ -28,9 +30,10 @@ public class StringUtil {
 	}
 
 	/**
-	 * 判断是否不是空
+	 * 判断源字符串是否不为空
 	 * 
 	 * @param str
+	 *            源字符串
 	 * @return
 	 */
 	public static boolean isNotEmpty(String str) {
@@ -45,6 +48,7 @@ public class StringUtil {
 	 * 格式化模糊查询
 	 * 
 	 * @param str
+	 *            源字符串
 	 * @return
 	 */
 	public static String formatLike(String str) {
@@ -59,6 +63,7 @@ public class StringUtil {
 	 * 过滤掉集合里的空格
 	 * 
 	 * @param list
+	 *            源字符串集合
 	 * @return
 	 */
 	public static List<String> filterWhite(List<String> list) {
@@ -72,8 +77,10 @@ public class StringUtil {
 	}
 
 	/**
+	 * 判断源字符是否为空
 	 * 
 	 * @param cs
+	 *            源字符
 	 * @return
 	 */
 	public static boolean isBlank(final CharSequence cs) {
@@ -90,8 +97,10 @@ public class StringUtil {
 	}
 
 	/**
+	 * 判断源字符是否不为空
 	 * 
 	 * @param cs
+	 *            源字符
 	 * @return
 	 */
 	public static boolean isNotBlank(final CharSequence cs) {
