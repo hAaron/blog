@@ -13,5 +13,6 @@ public class ResponseUtil {
 		out.println(o.toString());
 		out.flush();
 		out.close();
+		System.out.println("sfasd");
 	}
 }

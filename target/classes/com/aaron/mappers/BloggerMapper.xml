@@ -3,25 +3,24 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaron.dao.BloggerDao">
-
 	<resultMap type="Blogger" id="BloggerResult">
-		<result property="id" column="id"/>
-		<result property="userName" column="userName"/>
-		<result property="password" column="password"/>
-		<result property="nickName" column="nickName"/>
-		<result property="sign" column="sign"/>
-		<result property="proFile" column="proFile"/>
-		<result property="imageName" column="imageName"/>
+		<result property="id" column="id" />
+		<result property="userName" column="userName" />
+		<result property="password" column="password" />
+		<result property="nickName" column="nickName" />
+		<result property="sign" column="sign" />
+		<result property="proFile" column="proFile" />
+		<result property="imageName" column="imageName" />
 	</resultMap>
-	
-	<select id="find"  resultMap="BloggerResult">
+
+	<select id="find" resultMap="BloggerResult">
 		select * from t_blogger where id=1;
 	</select>
-	
+
 	<select id="getByUserName" parameterType="String" resultMap="BloggerResult">
 		select * from t_blogger where userName=#{userName}
 	</select>
-	
+
 	<update id="update" parameterType="Blogger">
 		update t_blogger
 		<set>
@@ -43,5 +42,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where id=1
 	</update>
-	
+
 </mapper> 
