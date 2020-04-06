@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.aaron.constant.Constants;
 import com.aaron.constant.FileConstants;
 import com.aaron.entity.Blogger;
 import com.aaron.service.BloggerService;
@@ -88,7 +89,7 @@ public class BloggerAdminController {
 	@RequestMapping("/modifyPassword")
 	public String modifyPassword(String newPassword,HttpServletResponse response)throws Exception{
 		Blogger blogger=new Blogger();
-		blogger.setPassword(CryptographyUtil.md5(newPassword, "aaron"));
+		blogger.setPassword(CryptographyUtil.md5(newPassword, Constants.PASSOWORD_MD5));
 		int resultTotal=bloggerService.update(blogger);
 		JSONObject result=new JSONObject();
 		if(resultTotal>0){
